@@ -1,0 +1,42 @@
+<html>
+ <head>
+  <title>Test Page for multiplyAndAddFive(value1, value2)</title>
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+  <script type="text/javascript" src="http://x-streamly-test.herokuapp.com/xstreamlyClient.js"></script>
+  <script src="globals.js"></script>
+  
+  <script src="simple.js"></script>
+  <script src="persisted.js"></script>
+  <script src="presence.js"></script>
+  <script src="connectionState.js"></script>
+  <script src="security.js"></script>
+  <script>
+      var currentTestName;
+
+      QUnit.testStart = function(testName) {
+          currentTestName = testName.name;
+          log('--------------starting ' + testName.name);
+      };
+
+      QUnit.testDone = function(testName) {
+          currentTestName = testName.name;
+          log('--------------done with ' + testName.name);
+      };
+
+      function getTestTestName() {
+          var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
+          return testName;
+      }
+  </script>
+ </head>
+ <body>
+
+    <h1 id="qunit-header">Tests</h1>
+     <h2 id="qunit-banner"></h2>
+     <div id="qunit-testrunner-toolbar"></div>
+     <h2 id="qunit-userAgent"></h2>
+     <ol id="qunit-tests"></ol>
+     <div id="qunit-fixture">test markup, will be hidden</div
+ </body>
+</html>
