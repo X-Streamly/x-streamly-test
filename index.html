@@ -5,14 +5,8 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   
-  
-  
   <script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
-  
-
-  <script type="text/javascript" src="https://secure.x-stream.ly/xstreamlyClient.js"></script>
-  <script type="text/javascript" src="https://secure.x-stream.ly/jquery.cookie.js"></script>
-  <script src="https://secure.x-stream.ly/jquery.base64.js"></script>
+ 
   <script src="globals.js"></script>
   
   <script src="simple.js"></script>
@@ -22,31 +16,62 @@
   <script src="security.js"></script>
   <script src="rest.js"></script>
   <script>
-      var currentTestName;
+  
+  	var server = getParameterByName('server');
+	if(server){
+		xstreamlyRootDomain = server;
+	}
+	console.log('using server '+xstreamlyRootDomain);
+	
+	//we want to use this way of loading the files so we can respect the server setting if it is passed in
+	function IncludeJavaScript(jsFile) {
+    	document.write('<script type="text/javascript" src="'+ jsFile + '"></scr' + 'ipt>');
+	}
+	
+	IncludeJavaScript(xstreamlyRootDomain+"/xstreamlyClient.js");
+  	IncludeJavaScript(xstreamlyRootDomain+"/jquery.cookie.js");
+  	IncludeJavaScript(xstreamlyRootDomain+"/jquery.base64.js");
+  	
+	var currentTestName;
 
-      QUnit.testStart = function(testName) {
-          currentTestName = testName.name;
-          log('--------------starting ' + testName.name);
-      };
+	QUnit.testStart = function(testName) {
+		currentTestName = testName.name;
+		log('--------------starting ' + testName.name);
+	};
 
-      QUnit.testDone = function(testName) {
-          currentTestName = testName.name;
-          log('--------------done with ' + testName.name);
-      };
+	QUnit.testDone = function(testName) {
+		currentTestName = testName.name;
+		log('--------------done with ' + testName.name);
+	};
 
-      function getTestTestName() {
-          var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
-          return testName;
-      }
+	function getTestTestName() {
+		var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
+		return testName;
+	}
+      
+	function getParameterByName(name)
+	{
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(window.location.href);
+		if(results == null){
+		return "";
+		}else{
+		return decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+	}
+	
+
   </script>
  </head>
  <body>
-
+    To point the tests agains a server besides http://secure.x-stream.ly the the ?server= querry parameter
     <h1 id="qunit-header">Tests</h1>
      <h2 id="qunit-banner"></h2>
      <div id="qunit-testrunner-toolbar"></div>
      <h2 id="qunit-userAgent"></h2>
      <ol id="qunit-tests"></ol>
-     <div id="qunit-fixture">test markup, will be hidden</div
+     <div id="qunit-fixture">test markup, will be hidden</div>
  </body>
 </html>
