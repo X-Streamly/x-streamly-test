@@ -46,18 +46,19 @@
 		}
 	}
 	
+	var currentTestName;
+	
 	function getTestTestName() {
 		var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
 		return testName;
 	}
-  	
-  	
+  	  	
   	$(window).load(function() {
 	  	if(port){
 	  		XStreamly.port = port;
 	  	}
 	  	
-		var currentTestName;
+		
 
 		QUnit.testStart = function(testName) {
 			currentTestName = testName.name;
