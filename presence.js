@@ -10,7 +10,7 @@ test("subscription_succeeded generated", function() {
     	ok(true,'got subscription loaded');
     	notEqual(null,members,'members is set');
     	members.each(function(member){
-    		log(member);
+    		log('got member: '+member.id);
     	});
         start();
     });
