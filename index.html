@@ -18,6 +18,7 @@
   <script>
   
   	var server = getParameterByName('server');
+  	var port = getParameterByName('port');
 	if(server){
 		xstreamlyRootDomain = server;
 	}
@@ -32,23 +33,6 @@
   	IncludeJavaScript(xstreamlyRootDomain+"/jquery.cookie.js");
   	IncludeJavaScript(xstreamlyRootDomain+"/jquery.base64.js");
   	
-	var currentTestName;
-
-	QUnit.testStart = function(testName) {
-		currentTestName = testName.name;
-		log('--------------starting ' + testName.name);
-	};
-
-	QUnit.testDone = function(testName) {
-		currentTestName = testName.name;
-		log('--------------done with ' + testName.name);
-	};
-
-	function getTestTestName() {
-		var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
-		return testName;
-	}
-      
 	function getParameterByName(name)
 	{
 		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -61,6 +45,30 @@
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
 		}
 	}
+	
+	function getTestTestName() {
+		var testName = (currentTestName + ' ' + new Date().toString() + ' ' + Math.random()).replace(/[\(\)\.]/g, "");
+		return testName;
+	}
+  	
+  	
+  	$(window).load(function() {
+	  	if(port){
+	  		XStreamly.port = port;
+	  	}
+	  	
+		var currentTestName;
+
+		QUnit.testStart = function(testName) {
+			currentTestName = testName.name;
+			log('--------------starting ' + testName.name);
+		};
+
+		QUnit.testDone = function(testName) {
+			currentTestName = testName.name;
+			log('--------------done with ' + testName.name);
+		};
+	});
 	
 
   </script>
