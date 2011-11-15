@@ -13,8 +13,11 @@ test("default security token can not send private messages", function() {
     testChannel.bind('test', function(data) {
         ok(false,'Should not have resived message');
     });
+    
+    setTimeout("start()",1500)
 
     testChannel.trigger('test', "I hope I don't get this");
+    stop();
 });
 
 //test that you can get persisted messages
@@ -28,8 +31,10 @@ test("secure token can access private channels", function() {
 
     var count =0;
     testChannel.bind('test', function(data) {
-        ok(false,'Should not have resived message');
+        ok(true,'got message');
+        start();
     });
 
     testChannel.trigger('test', "I hope I don't get this");
+    stop();
 });
