@@ -12,7 +12,7 @@ test("connection state progression", function() {
         ok(true, "connected");
         everConnected = true;
         equal(xstreamly.connection.state, "connected","state is set correctly");
-        xstreamly.disconnect();
+        xstreamly.stop();
     });
 
     xstreamly.connection.bind('disconnected', function() {
