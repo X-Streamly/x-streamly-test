@@ -62,12 +62,12 @@
 
 		QUnit.testStart = function(testName) {
 			currentTestName = testName.name;
-			log('--------------starting ' + testName.name);
+			XStreamly.log('--------------starting ' + testName.name);
 		};
 
 		QUnit.testDone = function(testName) {
 			currentTestName = testName.name;
-			log('--------------done with ' + testName.name);
+			XStreamly.log('--------------done with ' + testName.name);
 		};
 	});
 	
